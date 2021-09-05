@@ -1,0 +1,150 @@
+<!-- 
+  GUMMY NOTES APP => Notes taking app which uses local storage to save notes & fetches them back when you open app again.
+                      Notes are stored in form of objects in local storage.
+                      Bootstrap is used for UI.
+
+  FEATURES:
+    Title + Note
+    Responsive
+    Add Note
+    Delete Note
+    Mark Note as Important
+    Search Notes
+
+
+  PROTECTIVE MEASURES:
+    User Cannnot Add a Note, if title or note field is empty.
+    User will be asked to confirm overwriting a note, if he enters a title which is already present.
+
+ -->
+
+
+
+ 
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+  <!-- Title -->
+  <title>Gummy Notes</title>
+
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Gummy Notes</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input oninput="search_note()" id="search_txt" class="form-control me-2" type="search" placeholder="Search"
+            aria-label="Search">
+          <button onclick="search_note()" class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <!-- Empty Field Modal -->
+  <div class="modal fade" id="alert_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Empty Fields</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Title or Notes field is empty,&nbsp;
+          Please fill both the fields.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Existing Title Modal -->
+  <div class="modal fade" id="confirm_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Title Already Exists</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          This title already exists, this action will overwrite previous note. <br>
+          Confirm Changes?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+          <button id="Confirmed" onclick="confirm_changes()" type="button" data-bs-dismiss="modal"
+            class="btn btn-primary">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Main Body -->
+  <div class="container my-2 px-5">
+    <h1 class="mx-5">Welcome to Gummy Notes</h1>
+    <div class="card mx-5">
+      <div class="card-body">
+        <h5 class="card-title">Add a Note</h5>
+        <div class="input-group">
+          <input type="text" id="add_title" class="form-control" placeholder="Title" aria-label="Username"
+            aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group my-3">
+          <textarea id="add_note" class="form-control" placeholder="Note" aria-label="With textarea"
+            rows="6"></textarea>
+        </div>
+        <a href="#" id="add_btn" class="btn btn-primary">Add Note</a>
+      </div>
+    </div>
+    <div class="mx-5">
+      <hr>
+      <h1>Your Notes</h1>
+      <hr>
+      <div id="notes_elem" class="row  justify-content-center container-fluid my-0 mx-0 px-1 py-0">
+        <!-- NOTES -->
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+
+  <!-- My JS -->
+  <script src="js/script.js"></script>
+</body>
+
+</html>
